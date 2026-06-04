@@ -1,0 +1,12 @@
+.git
+.gitignore
+.env
+.env.example
+**/.env
+**/.env.example
+docker-compose.yml
+README.md
+evidence/
+kubernetes/
+scripts/
+*.md
