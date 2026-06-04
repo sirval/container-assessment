@@ -33,39 +33,81 @@ The application is a Golang backend API that connects to MongoDB for data storag
 
 ```text
 container-assessment/
-├── Server/
-│   └── MuchToDo/
-│       ├── cmd/
-│       ├── docs/
-│       ├── internal/
-│       ├── go.mod
-│       ├── go.sum
-│       └── Makefile
-├── Dockerfile
-├── docker-compose.yml
-├── .dockerignore
-├── kind-config.yaml
-├── kubernetes/
-│   ├── namespace.yaml
-│   ├── mongodb/
-│   │   ├── mongodb-secret.yaml
-│   │   ├── mongodb-configmap.yaml
-│   │   ├── mongodb-pvc.yaml
-│   │   ├── mongodb-deployment.yaml
-│   │   └── mongodb-service.yaml
-│   ├── backend/
-│   │   ├── backend-secret.yaml
-│   │   ├── backend-configmap.yaml
-│   │   ├── backend-deployment.yaml
-│   │   └── backend-service.yaml
-│   └── ingress.yaml
-├── scripts/
-│   ├── docker-build.sh
-│   ├── docker-run.sh
-│   ├── k8s-deploy.sh
-│   └── k8s-cleanup.sh
-├── evidence/
-└── README.md
+|-- .dockerignore
+|-- .gitignore
+|-- Dockerfile
+|-- README.md
+|-- docker-compose.yml
+|-- kind-config.yaml
+|-- Server/
+|   |-- README.md
+|   `-- MuchToDo/
+|       |-- .env.example
+|       |-- Makefile
+|       |-- docker-compose.yaml
+|       |-- go.mod
+|       |-- go.sum
+|       |-- cmd/
+|       |   `-- api/
+|       |       `-- main.go
+|       |-- docs/
+|       |   |-- docs.go
+|       |   |-- swagger.json
+|       |   `-- swagger.yaml
+|       `-- internal/
+|           |-- auth/
+|           |   |-- auth.go
+|           |   `-- auth_test.go
+|           |-- cache/
+|           |   `-- cache.go
+|           |-- config/
+|           |   `-- config.go
+|           |-- database/
+|           |   `-- database.go
+|           |-- handlers/
+|           |   |-- handlers_test.go
+|           |   |-- handlers_test.go.cp
+|           |   |-- health.go
+|           |   |-- todo.go
+|           |   `-- user.go
+|           |-- logger/
+|           |   `-- logger.go
+|           |-- middleware/
+|           |   |-- logger.go
+|           |   `-- middleware.go
+|           |-- models/
+|           |   |-- todo.go
+|           |   `-- user.go
+|           `-- routes/
+|               `-- routes.go
+|-- evidence/
+|   |-- Application accessible through a NodePort Service.PNG
+|   |-- Docker build process completion.PNG
+|   |-- Docker compose running successfully1.PNG
+|   |-- Docker compose running successfully2.PNG
+|   |-- Kind cluster creation.PNG
+|   |-- Kubectl commands showing pod status, services, and ingress.PNG
+|   |-- Kubernetes deployments running.PNG
+|   `-- db_web_docker_check_response.PNG
+|-- kubernetes/
+|   |-- ingress.yaml
+|   |-- namespace.yaml
+|   |-- backend/
+|   |   |-- backend-configmap.yaml
+|   |   |-- backend-deployment.yaml
+|   |   |-- backend-secret.yaml
+|   |   `-- backend-service.yaml
+|   `-- mongodb/
+|       |-- mongodb-configmap.yaml
+|       |-- mongodb-deployment.yaml
+|       |-- mongodb-pvc.yaml
+|       |-- mongodb-secret.yaml
+|       `-- mongodb-service.yaml
+`-- scripts/
+    |-- docker-build.sh
+    |-- docker-run.sh
+    |-- k8s-cleanup.sh
+    `-- k8s-deploy.sh
 ```
 
 ## Prerequisites
@@ -379,30 +421,29 @@ To delete the Kind cluster completely:
 
 Screenshots are stored in the `evidence/` folder.
 
-Required evidence includes:
-
-1. Docker image build completed successfully
-2. Docker Compose containers running
-3. Application responding through Docker Compose
-4. Kind cluster created successfully
-5. Kubernetes pods running
-6. Kubernetes services created
-7. Application responding through Kubernetes NodePort
-8. Ingress resource created
-
-Suggested evidence files:
+Included evidence files:
 
 ```text
 evidence/
-├── 01-docker-build-success.png
-├── 02-docker-compose-running.png
-├── 03-docker-compose-health-response.png
-├── 04-kind-cluster-created.png
-├── 05-kubernetes-pods-running.png
-├── 06-kubernetes-services.png
-├── 07-nodeport-health-response.png
-└── 08-kubernetes-ingress.png
+|-- Application accessible through a NodePort Service.PNG
+|-- Docker build process completion.PNG
+|-- Docker compose running successfully1.PNG
+|-- Docker compose running successfully2.PNG
+|-- Kind cluster creation.PNG
+|-- Kubectl commands showing pod status, services, and ingress.PNG
+|-- Kubernetes deployments running.PNG
+`-- db_web_docker_check_response.PNG
 ```
+
+The evidence covers:
+
+1. Docker image build completion
+2. Docker Compose containers running successfully
+3. Application and database response checks through Docker Compose
+4. Kind cluster creation
+5. Kubernetes deployments running
+6. Kubernetes pod, service, and ingress status
+7. Application access through the Kubernetes NodePort service
 
 ## Notes
 
